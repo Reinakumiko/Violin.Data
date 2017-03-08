@@ -11,7 +11,7 @@ namespace Violin.Data.DateTime
 	public static class DateTimeExtension
 	{
 		/// <summary>
-		/// 将Unix时间戳转换为DateTime对象
+		/// 将Unix时间戳转换为 <see cref="DateTime"/> 的实例
 		/// </summary>
 		/// <param name="date"></param>
 		/// <param name="stamp">需要转换的时间戳</param>

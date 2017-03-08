@@ -8,7 +8,7 @@ namespace Violin.Data.Database.Attributes
 	/// <summary>
 	/// 用于标记类或成员在数据库中的名称
 	/// </summary>
-	[AttributeUsage(AttributeTargets.All, Inherited = true, AllowMultiple = true)]
+	[AttributeUsage(AttributeTargets.Class|AttributeTargets.Struct|AttributeTargets.Method|AttributeTargets.Property, Inherited = true, AllowMultiple = true)]
 	public sealed class NameAttribute : Attribute
 	{
 		/// <summary>

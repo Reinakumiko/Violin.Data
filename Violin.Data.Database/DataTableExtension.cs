@@ -10,11 +10,27 @@
 
 	public static class DataTableExtension
 	{
+		/// <summary>
+		/// 将一个 <see cref="DataTable"/> 转换为等效的T-SQL语句并执行。将会读取类与属性的 <see cref="ColumnAttribute"/> 特性作为键，属性值作为值的形式。
+		/// </summary>
+		/// <typeparam name="TEntity">需要将 <see cref="DataTable"/> 中每一行映射到的类型</typeparam>
+		/// <param name="table">需要处理的 <see cref="DataTable"/> 的数据表</param>
+		/// <param name="tableName">结果执行的目标数据库表名</param>
+		/// <param name="sqlConn">结果执行到的 <see cref="SqlConnection"/> 目标</param>
+		/// <returns>查询执行成功与否</returns>
 		static public bool UpdateToDatabase<TEntity>(this DataTable table, string tableName, SqlConnection sqlConn) where TEntity : class
 		{
 			return UpdateToDatabase(table.ToJToken().ToObject<List<TEntity>>(), tableName, sqlConn);
 		}
 
+		/// <summary>
+		/// 将一个 <see cref="DataTable"/> 转换为等效的T-SQL语句并执行。将会读取类与属性的 <see cref="ColumnAttribute"/> 特性作为键，属性值作为值的形式。
+		/// </summary>
+		/// <typeparam name="TEntity">需要将 <see cref="DataTable"/> 中每一行映射到的类型</typeparam>
+		/// <param name="rows">需要处理的 <see cref="IEnumerable{T}"/> 的数据集合</param>
+		/// <param name="tableName">结果执行的目标数据库表名</param>
+		/// <param name="sqlConn">结果执行到的 <see cref="SqlConnection"/> 目标</param>
+		/// <returns>查询执行成功与否</returns>
 		static public bool UpdateToDatabase<TEntity>(this IEnumerable<TEntity> rows, string tableName, SqlConnection sqlConn) where TEntity : class
 		{
 			//获得泛型的类
@@ -80,6 +96,5 @@
 			//
 			return command.ExecuteNonQuery() > 0;
 		}
-
 	}
 }
