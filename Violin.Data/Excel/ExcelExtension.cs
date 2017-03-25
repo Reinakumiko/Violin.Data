@@ -46,7 +46,7 @@
 
 			foreach (var row in sheet.Rows())
 			{
-				if(header)
+				if (header)
 				{
 					table.Columns.AddRange(row.ToDataRow(r => new DataColumn(r.GetString())).ToArray());
 
@@ -55,7 +55,11 @@
 				}
 
 
-				table.Rows.Add(row.ToDataRow(r => r.GetValue<dynamic>()).ToArray());
+				table.Rows.Add(row.ToDataRow(r =>
+				{
+					var val = r.GetValue<dynamic>();
+					return r.DataType == XLCellValues.DateTime ? val.ToString("yyyy-MM-dd HH:mm:ss") : val;
+				}).ToArray());
 			}
 
 			return table;

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Violin.Data.Json
@@ -36,6 +37,17 @@ namespace Violin.Data.Json
 		public static T ConvertTo<T>(this object obj)
 		{
 			return JsonConvert.DeserializeObject<T>(obj.ToJson());
+		}
+
+		/// <summary>
+		/// 为当前实例创建一个副本
+		/// </summary>
+		/// <typeparam name="T">要创建副本的类型</typeparam>
+		/// <param name="obj">需要复制的类型实例</param>
+		/// <returns>当前实例的副本</returns>
+		public static T Clone<T>(this T obj)
+		{
+			return obj.ConvertTo<T>();
 		}
 	}
 }
