@@ -6,6 +6,7 @@
 	using System.IO;
 	using System.Linq;
 	using ClosedXML.Excel;
+	using CsvHelper;
 
 	public static class ExcelExtension
 	{
@@ -89,10 +90,14 @@
 		/// </summary>
 		/// <param name="table">要写入 <see cref="MemoryStream"/> 的 <see cref="DataTable"/> 数据表实例</param>
 		/// <returns>一个可读取的 <see cref="MemoryStream"/> 实例</returns>
+		/// <exception cref="ArgumentNullException">传入的实例为空</exception>
 		static public MemoryStream ToExcel(this DataTable table)
 		{
+			if (table == null)
+				throw new ArgumentNullException(nameof(table));
+
 			var workbook = new XLWorkbook();
-			workbook.AddWorksheet(table);
+			workbook.AddWorksheet(table, "Sheet1");
 
 			MemoryStream excelWrite = new MemoryStream();
 			workbook.SaveAs(excelWrite, true);
@@ -105,14 +110,46 @@
 		/// </summary>
 		/// <param name="table">要写入 <see cref="MemoryStream"/> 的 <see cref="DataTable"/> 数据表实例</param>
 		/// <param name="filePath">保存文件的存储路径</param>
+		/// <exception cref="ArgumentNullException">传入的实例为空</exception>
 		static public void ToExcel(this DataTable table, string filePath)
 		{
+			if (table == null)
+				throw new ArgumentNullException(nameof(table));
+
 			using (var file = File.Open(filePath, FileMode.OpenOrCreate, FileAccess.Write))
 			{
 				var workbook = new XLWorkbook();
 				workbook.AddWorksheet(table, "Sheet1");
 				workbook.SaveAs(file, false);
 			}
+		}
+
+		/// <summary>
+		/// 将 csv 文件中的内容转换为等效的 <see cref="DataTable"/> 实例
+		/// </summary>
+		/// <param name="csv"></param>
+		/// <returns></returns>
+		static public DataTable ToDataTable(this CsvReader csv)
+		{
+			var table = new DataTable();
+
+			if(csv.ReadHeader())
+			{
+				csv.FieldHeaders.ForEach(h => table.Columns.Add(h));
+			}
+
+			while (csv.Read())
+			{
+				var row = table.NewRow();
+				foreach (DataColumn column in table.Columns)
+				{
+					row[column.ColumnName] = csv.GetField(column.DataType, column.ColumnName);
+				}
+
+				table.Rows.Add(row);
+			}
+
+			return table;
 		}
 	}
 }

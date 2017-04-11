@@ -31,6 +31,10 @@
 				//将属性转换为对象
 				var attrColumn = Attribute.GetCustomAttribute(property, typeof(NameAttribute)) as NameAttribute;
 
+				//跳过未设置特性的属性
+				if (attrColumn == null)
+					continue;
+
 				//获取字段值
 				dynamic value = property.GetValue(entity, null);
 
@@ -39,7 +43,7 @@
 					value = value.ToString("yyyy-MM-dd HH:mm:ss");
 
 				//将特性的列名与字段值添加到键值对
-				keyValues.Add(attrColumn.Name, value);
+				keyValues.Add(attrColumn.Name, Convert.ToString(value));
 			}
 
 			return keyValues;
@@ -53,7 +57,7 @@
 		/// <returns>该类对应的表名</returns>
 		static public string GetClassName<TEntity>(this TEntity entity)
 		{
-			return entity.GetClassName();
+			return GetClassName<TEntity>();
 		}
 
 		/// <summary>

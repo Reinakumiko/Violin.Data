@@ -19,6 +19,20 @@ namespace Violin.Data.Database
 			return table;
 		}
 
+		public DataTable ExcuteQuery(TConnection sqlConn, string queryString)
+		{
+			return GetQueryResult(sqlConn, queryString);
+		}
+
+		public int ExcuteNonQuery(TConnection sqlConn, string queryString)
+		{
+			using (var command = sqlConn.CreateCommand())
+			{
+				command.CommandText = queryString;
+				return command.ExecuteNonQuery();
+			}
+		}
+
 		public DataTable GetTableWithoutCondition(TConnection sqlConn, string tableName)
 		{
 			return GetTable(sqlConn, tableName, "1=1");
@@ -31,7 +45,7 @@ namespace Violin.Data.Database
 
 		public DataTable GetTable(TConnection sqlConn, string tableName, string condition)
 		{
-			return GetTable(sqlConn, tableName, condition, "*");
+			return GetQueryResult(sqlConn, string.Format("select * from {0} where {1}", tableName, condition));
 		}
 
 		public DataTable GetTable(TConnection sqlConn, string tableName, string condition, params string[] colNames)

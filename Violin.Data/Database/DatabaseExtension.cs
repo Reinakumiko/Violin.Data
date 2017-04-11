@@ -76,13 +76,33 @@
 				queryBuilder.AppendLine(string.Format("insert into [{0}] ([{1}]) values ('{2}');", tableName, string.Join("],[", keyValues.Keys), string.Join("','", keyValues.Values)));
 			}
 
+			return sqlConn.Excute(queryBuilder.ToString());
+		}
+
+		static public bool InsertToDatabase<TEntity>(this TEntity entity, SqlConnection sqlConn) where TEntity : class
+		{
+			var tableName = entity.GetClassName();
+			var keyValues = entity.GetPropertyName();
+
+			keyValues.Where(value => value.Value.Contains(",")).Select(val =>
+			{
+				val.Value.Replace("'", "''").Replace("\n", "");
+				return val;
+			});
+
+			var query = string.Format("insert into [{0}] ([{1}]) values ('{2}');", tableName, string.Join("],[", keyValues.Keys), string.Join("','", keyValues.Values));
+			return sqlConn.Excute(query);
+		}
+
+		static private bool Excute(this SqlConnection sqlConn, string query)
+		{
 			//打开数据库连接
 			if (sqlConn.State == ConnectionState.Closed)
 				sqlConn.Open();
 
 			//
 			var command = sqlConn.CreateCommand();
-			command.CommandText = queryBuilder.ToString();
+			command.CommandText = query;
 			command.CommandTimeout = 600;
 
 			if (string.IsNullOrWhiteSpace(command.CommandText))
