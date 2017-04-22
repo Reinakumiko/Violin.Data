@@ -19,7 +19,7 @@ namespace Violin.Data.DataTable
 		}
 
 		/// <summary>
-		/// 将列中的值转换成指定类型，如果列为空则赋予默认值
+		/// 将列中的值转换成指定的结构类型，如果列为空则赋予默认值
 		/// </summary>
 		/// <typeparam name="T">要转换的值类型</typeparam>
 		/// <param name="row">需要转换的数据行</param>

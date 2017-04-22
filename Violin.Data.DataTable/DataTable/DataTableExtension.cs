@@ -1,4 +1,4 @@
-﻿namespace Violin.Data.Database
+﻿namespace Violin.Data.DataTable
 {
 	using System;
 	using System.Collections.Generic;

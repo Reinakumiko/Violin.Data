@@ -79,6 +79,13 @@
 			return sqlConn.Excute(queryBuilder.ToString());
 		}
 
+		/// <summary>
+		/// 将对象插入到对应的数据库表中
+		/// </summary>
+		/// <typeparam name="TEntity"></typeparam>
+		/// <param name="entity"></param>
+		/// <param name="sqlConn"></param>
+		/// <returns></returns>
 		static public bool InsertToDatabase<TEntity>(this TEntity entity, SqlConnection sqlConn) where TEntity : class
 		{
 			var tableName = entity.GetClassName();
@@ -94,6 +101,12 @@
 			return sqlConn.Excute(query);
 		}
 
+		/// <summary>
+		/// 执行数据库查询
+		/// </summary>
+		/// <param name="sqlConn"></param>
+		/// <param name="query"></param>
+		/// <returns></returns>
 		static private bool Excute(this SqlConnection sqlConn, string query)
 		{
 			//打开数据库连接

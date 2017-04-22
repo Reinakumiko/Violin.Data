@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D6DD5136-5128-475E-95DD-F51938E2B3A5}</ProjectGuid>
+    <ProjectGuid>{D29404BE-8FB8-4B66-9507-ADD302EF72B0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Violin.Data.Database</RootNamespace>
-    <AssemblyName>Violin.Data.Database</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>Violin.Web</RootNamespace>
+    <AssemblyName>Violin.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -35,7 +35,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -45,14 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTableExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Violin.Data\Violin.Data.csproj">
-      <Project>{fe336232-827d-4c19-b7e8-495f5382c73d}</Project>
-      <Name>Violin.Data</Name>
-    </ProjectReference>
+    <Compile Include="WebApi\WebApiRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
