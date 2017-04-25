@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Violin", "Violin\Violin.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Violin.Database", "Violin.Database\Violin.Database.csproj", "{7106B707-9AC7-4002-BC00-A6474320FF21}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Violin.Net", "Violin.Net\Violin.Net.csproj", "{51EDF49C-474C-44E6-844F-0989AD9A4D94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{7106B707-9AC7-4002-BC00-A6474320FF21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7106B707-9AC7-4002-BC00-A6474320FF21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7106B707-9AC7-4002-BC00-A6474320FF21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51EDF49C-474C-44E6-844F-0989AD9A4D94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51EDF49C-474C-44E6-844F-0989AD9A4D94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51EDF49C-474C-44E6-844F-0989AD9A4D94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51EDF49C-474C-44E6-844F-0989AD9A4D94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
