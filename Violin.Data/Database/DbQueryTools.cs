@@ -6,15 +6,15 @@ namespace Violin.Data.Database
 	using System.Data;
 
 	public class DbQueryTools<TConnection, TDataAdapter>
-			where TConnection : DbConnection
+			where TConnection : IDbConnection
 			where TDataAdapter : DbDataAdapter
 	{
 		public DataTable GetQueryResult(TConnection sqlConn, string queryString)
 		{
 			var table = new DataTable();
 
-			var adapter = Activator.CreateInstance(typeof(TDataAdapter), queryString, sqlConn) as TDataAdapter;
-			adapter.Fill(table);
+			using (var adapter = Activator.CreateInstance(typeof(TDataAdapter), queryString, sqlConn) as TDataAdapter)
+				adapter.Fill(table);
 
 			return table;
 		}
