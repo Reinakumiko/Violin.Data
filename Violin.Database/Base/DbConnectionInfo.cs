@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace Violin.Data.Database.Base
 {
 	/// <summary>
-	/// 表示一个数据库的连接字符串
+	/// 表示一个数据库连接的基本信息
 	/// </summary>
-	public class DbConnectString
+	public class DbConnectionInfo
 	{
 		/// <summary>
 		/// 服务器的链接地址
@@ -45,7 +45,7 @@ namespace Violin.Data.Database.Base
 			connectionBuilder.AppendFormat("initial catalog={0};", Database);
 
 			if (Port.HasValue)
-				connectionBuilder.AppendFormat("", Port);
+				connectionBuilder.AppendFormat("port={0};", Port);
 
 			return connectionBuilder.ToString();
 		}

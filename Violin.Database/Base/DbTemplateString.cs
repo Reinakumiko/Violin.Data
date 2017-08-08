@@ -8,6 +8,6 @@ namespace Violin.Data.Database.Base
 {
 	public abstract class DbTemplateString
 	{
-		public abstract string GetTemplate(DbConnectString connString);
+		public abstract string GetTemplate(DbConnectionInfo connString);
 	}
 }

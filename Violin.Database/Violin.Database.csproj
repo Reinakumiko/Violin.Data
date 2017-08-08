@@ -43,11 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\DbConnector.cs" />
-    <Compile Include="Base\DbConnectString.cs" />
+    <Compile Include="Base\DbConnectionInfo.cs" />
     <Compile Include="Base\DbTemplateString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Linq\" />
     <Folder Include="MySQL\" />
     <Folder Include="SQLServer\" />
   </ItemGroup>
