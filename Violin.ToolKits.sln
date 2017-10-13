@@ -15,6 +15,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Violin.Database", "Violin.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Violin.Net", "Violin.Net\Violin.Net.csproj", "{51EDF49C-474C-44E6-844F-0989AD9A4D94}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Violin.Data.Tester", "Violin.Data.Tester\Violin.Data.Tester.csproj", "{72C05830-C41C-4913-BBCE-6C3AB927367B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tester", "Tester", "{6D644596-4560-4E08-B252-05AC64FA26BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Violin.Logger", "Violin.Logger\Violin.Logger.csproj", "{CAA344F2-83F4-4720-A2A3-5B7F5257ECF8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,8 +51,19 @@ Global
 		{51EDF49C-474C-44E6-844F-0989AD9A4D94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51EDF49C-474C-44E6-844F-0989AD9A4D94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51EDF49C-474C-44E6-844F-0989AD9A4D94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72C05830-C41C-4913-BBCE-6C3AB927367B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72C05830-C41C-4913-BBCE-6C3AB927367B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72C05830-C41C-4913-BBCE-6C3AB927367B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72C05830-C41C-4913-BBCE-6C3AB927367B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAA344F2-83F4-4720-A2A3-5B7F5257ECF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAA344F2-83F4-4720-A2A3-5B7F5257ECF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAA344F2-83F4-4720-A2A3-5B7F5257ECF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAA344F2-83F4-4720-A2A3-5B7F5257ECF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{72C05830-C41C-4913-BBCE-6C3AB927367B} = {6D644596-4560-4E08-B252-05AC64FA26BB}
 	EndGlobalSection
 EndGlobal
