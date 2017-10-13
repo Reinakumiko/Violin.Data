@@ -111,7 +111,7 @@
 		/// <param name="table">要写入 <see cref="MemoryStream"/> 的 <see cref="DataTable"/> 数据表实例</param>
 		/// <param name="filePath">保存文件的存储路径</param>
 		/// <exception cref="ArgumentNullException">传入的实例为空</exception>
-		static public void ToExcel(this DataTable table, string filePath)
+		static public void ToExcel(this DataTable table, string filePath, string workSheetName = "Sheet1")
 		{
 			if (table == null)
 				throw new ArgumentNullException(nameof(table));
@@ -119,7 +119,7 @@
 			using (var file = File.Open(filePath, FileMode.OpenOrCreate, FileAccess.Write))
 			{
 				var workbook = new XLWorkbook();
-				workbook.AddWorksheet(table, "Sheet1");
+				workbook.AddWorksheet(table, workSheetName);
 				workbook.SaveAs(file, false);
 			}
 		}
@@ -133,9 +133,13 @@
 		{
 			var table = new DataTable();
 
-			if(csv.ReadHeader())
+			if (csv.ReadHeader())
 			{
-				csv.FieldHeaders.ForEach(h => table.Columns.Add(h));
+				csv.FieldHeaders.ForEach(h =>
+				{
+					if (!string.IsNullOrWhiteSpace(h))
+						table.Columns.Add(h);
+				});
 			}
 
 			while (csv.Read())
