@@ -39,20 +39,23 @@
 				dynamic value = property.GetValue(entity, null);
 
 				//将数据转换为指定类型
-				if (attrColumn.Type != null)
-					value = Convert.ChangeType(value, attrColumn.Type);
-
-				//将数据以指定格式序列化
-				if (!string.IsNullOrWhiteSpace(attrColumn.Format))
+				if (value != null)
 				{
-					var formatString = string.Format("{{0:{0}}}", attrColumn.Format);
+					if (attrColumn.Type != null)
+						value = Convert.ChangeType(value, attrColumn.Type);
 
-					value = string.Format(formatString, value);
+					//将数据以指定格式序列化
+					if (!string.IsNullOrWhiteSpace(attrColumn.Format))
+					{
+						var formatString = string.Format("{{0:{0}}}", attrColumn.Format);
+
+						value = string.Format(formatString, value);
+					}
+
+					//将时间转换为标准格式
+					if (value is DateTime && string.IsNullOrWhiteSpace(attrColumn.Format))
+						value = value.ToString("yyyy-MM-dd HH:mm:ss");
 				}
-				
-				//将时间转换为标准格式
-				if (value is DateTime && string.IsNullOrWhiteSpace(attrColumn.Format))
-					value = value.ToString("yyyy-MM-dd HH:mm:ss");
 
 				//将特性的列名与字段值添加到键值对
 				keyValues.Add(attrColumn.Name, Convert.ToString(value));
