@@ -15,7 +15,7 @@ namespace Violin.Data.DataTable
 		public static string ToString(this DataRow row, string colName, string def = "")
 		{
 			var val = row[colName].ToString();
-			return val == string.Empty ? def : val;
+			return string.IsNullOrWhiteSpace(val) ? def : val;
 		}
 
 		/// <summary>

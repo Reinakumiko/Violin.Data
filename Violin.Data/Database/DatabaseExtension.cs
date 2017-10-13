@@ -67,13 +67,14 @@
 			{
 				var keyValues = item.GetPropertyName();
 
-				keyValues.Where(value => value.Value.Contains(",")).Select(val =>
+				var newKeyValue = keyValues.Select(val =>
 				{
-					val.Value.Replace("'", "''").Replace("\n", "");
-					return val;
-				});
+					var value = val.Value?.Replace("'", "''").Replace("\n", "") ?? val.Value;
 
-				queryBuilder.AppendLine(string.Format("insert into [{0}] ([{1}]) values ('{2}');", tableName, string.Join("],[", keyValues.Keys), string.Join("','", keyValues.Values)));
+					return new KeyValuePair<string, string>(val.Key, value);
+				}).ToDictionary(r => r.Key, r => r.Value);
+
+				queryBuilder.AppendLine(string.Format("insert into [{0}] ([{1}]) values ('{2}');", tableName, string.Join("],[", newKeyValue.Keys), string.Join("','", newKeyValue.Values)));
 			}
 
 			return sqlConn.Excute(queryBuilder.ToString());
