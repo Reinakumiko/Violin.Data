@@ -36,6 +36,10 @@ namespace Violin.Data.Database.Base
 		/// </summary>
 		public string Database { get; set; }
 
+		/// <summary>
+		/// 获取信息对应的连接字符串
+		/// </summary>
+		/// <returns></returns>
 		public override string ToString()
 		{
 			StringBuilder connectionBuilder = new StringBuilder();
