@@ -12,7 +12,12 @@ namespace Violin.Web.WebApi
 	{
 		public static string GetWebContent(string url)
 		{
-			HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
+			return new Uri(url).GetWebContent();
+		}
+
+		public static string GetWebContent(this Uri uri)
+		{
+			HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(uri);
 			using (Stream webStream = webRequest.GetResponse().GetResponseStream())
 			using (StreamReader sr = new StreamReader(webStream))
 			{
@@ -20,19 +25,16 @@ namespace Violin.Web.WebApi
 			}
 		}
 
-		public static string GetWebContent(this Uri uri)
-		{
-			return GetWebContent(uri.ToString());
-		}
-
 		public static Stream GetWebStream(string url)
 		{
-			return WebRequest.Create(url).GetResponse().GetResponseStream();
+			return new Uri(url).GetWebStream();
 		}
 
 		public static Stream GetWebStream(this Uri uri)
 		{
-			return GetWebStream(uri.ToString());
+			var webRequest = (HttpWebRequest)WebRequest.Create(uri);
+
+			return !webRequest.HaveResponse ? null : webRequest.GetResponse().GetResponseStream();
 		}
 	}
 }
