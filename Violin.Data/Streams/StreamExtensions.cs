@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Violin.Data.Path;
 
 namespace Violin.Data.Streams
 {
@@ -16,7 +17,12 @@ namespace Violin.Data.Streams
 
 		public static void Save(this Stream stream, string path)
 		{
-			var _fileInfo = CheckPathUnique(new FileInfo(path));
+			stream.Save(new FileInfo(path));
+		}
+
+		public static void Save(this Stream stream, FileInfo info)
+		{
+			var _fileInfo = info.CheckPathUnique();
 
 			if (!_fileInfo.Directory.Exists)
 				_fileInfo.Directory.Create();
@@ -33,7 +39,12 @@ namespace Violin.Data.Streams
 
 		public static void Save(this MemoryStream stream, string path)
 		{
-			var _fileInfo = CheckPathUnique(new FileInfo(path));
+			stream.Save(new FileInfo(path));
+		}
+
+		public static void Save(this MemoryStream stream, FileInfo info)
+		{
+			var _fileInfo = info.CheckPathUnique();
 
 			if (!_fileInfo.Directory.Exists)
 				_fileInfo.Directory.Create();
@@ -42,19 +53,6 @@ namespace Violin.Data.Streams
 			{
 				_file.WriteContent(stream.ToArray());
 			}
-		}
-
-		private static FileInfo CheckPathUnique(FileInfo path)
-		{
-			var currentPath = path;
-			var retryCount = 0;
-			
-			while (currentPath.Exists)
-			{
-				currentPath = new FileInfo($"{path.DirectoryName}/{path.Name} ({++retryCount}){currentPath.Extension}");
-			}
-
-			return currentPath;
 		}
 	}
 }
