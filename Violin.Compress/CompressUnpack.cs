@@ -29,7 +29,7 @@ namespace Violin.Compress
 		/// <returns>已使用GZip格式解压的文件</returns>
 		public static Stream UnpackGZ(FileInfo info)
 		{
-			if (!info.Exists)
+			if (!File.Exists(info.FullName))
 				throw new FileNotFoundException();
 
 			using (var file = info.Open(FileMode.Open, FileAccess.Read))
@@ -45,10 +45,17 @@ namespace Violin.Compress
 		{
 			using (var gzStream = new GZipInputStream(fileStream))
 			{
-				var stream = new MemoryStream();
-				gzStream.CopyTo(stream);
+				//新建一个临时文件
+				var temp = File.Open(Path.GetTempFileName(), FileMode.Create, FileAccess.ReadWrite);
 
-				return stream;
+				//将解压的包写入临时文件
+				gzStream.CopyTo(temp);
+
+				//将文件指针位置设置回顶部
+				temp.Seek(0, SeekOrigin.Begin);
+
+				//返回临时文件的流
+				return temp;
 			}
 		}
 
