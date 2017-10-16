@@ -1,7 +1,5 @@
-﻿namespace Violin.Data.Path
+﻿namespace System.IO
 {
-	using System.IO;
-
 	public static class PathExtension
 	{
 		/// <summary>
