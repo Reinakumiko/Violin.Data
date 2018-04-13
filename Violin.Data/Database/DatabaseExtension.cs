@@ -57,7 +57,7 @@
 		/// <param name="tableName">结果执行的目标数据库表名</param>
 		/// <param name="sqlConn">结果执行到的 <see cref="SqlConnection"/> 目标</param>
 		/// <returns>查询执行成功与否</returns>
-		static public bool UpdateToDatabase<TEntity>(this IEnumerable<TEntity> rows, string tableName, SqlConnection sqlConn) where TEntity : class
+		static public bool UpdateToDatabase<TEntity>(this IEnumerable<TEntity> rows, string tableName, SqlConnection sqlConn, SqlTransaction sqlTrans = null) where TEntity : class
 		{
 			//SQL 查询
 			var queryBuilder = new StringBuilder();
@@ -108,7 +108,7 @@
 		/// <param name="sqlConn"></param>
 		/// <param name="query"></param>
 		/// <returns></returns>
-		static private bool Excute(this SqlConnection sqlConn, string query)
+		static private bool Excute(this SqlConnection sqlConn, string query, SqlTransaction transaction = null)
 		{
 			//打开数据库连接
 			if (sqlConn.State == ConnectionState.Closed)
@@ -116,6 +116,7 @@
 
 			//
 			var command = sqlConn.CreateCommand();
+			command.Transaction = transaction;
 			command.CommandText = query;
 			command.CommandTimeout = 600;
 

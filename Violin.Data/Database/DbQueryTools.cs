@@ -4,6 +4,7 @@ using System.Data.Common;
 namespace Violin.Data.Database
 {
 	using System.Data;
+	using System.Data.SqlClient;
 
 	public class DbQueryTools<TConnection, TDataAdapter>
 			where TConnection : IDbConnection
@@ -55,12 +56,13 @@ namespace Violin.Data.Database
 			return GetQueryResult(sqlConn, string.Format("select [{0}] from {1} where {2}", columns, tableName, condition));
 		}
 
-		public void TruncateTable(TConnection sqlConn, string tableName)
+		public void TruncateTable(TConnection sqlConn, string tableName, SqlTransaction _trans = null)
 		{
 			if (sqlConn.State == ConnectionState.Closed)
 				sqlConn.Open();
 
 			var command = sqlConn.CreateCommand();
+			command.Transaction = _trans;
 			command.CommandText = string.Format("truncate table {0}", tableName);
 			command.ExecuteNonQuery();
 		}
