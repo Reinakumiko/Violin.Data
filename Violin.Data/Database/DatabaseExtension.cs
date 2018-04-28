@@ -77,7 +77,7 @@
 				queryBuilder.AppendLine(string.Format("insert into [{0}] ([{1}]) values ('{2}');", tableName, string.Join("],[", newKeyValue.Keys), string.Join("','", newKeyValue.Values)));
 			}
 
-			return sqlConn.Excute(queryBuilder.ToString());
+			return sqlConn.Excute(queryBuilder.ToString(), sqlTrans);
 		}
 
 		/// <summary>
